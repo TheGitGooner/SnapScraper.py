@@ -1,50 +1,96 @@
-# SnapScrap.py
-Downloads public Snapchat stories in your System.
+# SnapScraper.py
+Downloads public Snapchat stories, highlights, and spotlights to your system.
 
-## Saving this locally
+> **Forked from [allendema/SnapScrap.py](https://github.com/allendema/SnapScrap.py) and significantly enhanced with the help of Claude.**
+
+## What's new in this fork
+- ✅ Download **highlights** (curated story reels) and **spotlights** in addition to active stories
+- ✅ **Batch mode** — scrape multiple profiles in one command or from a text file
+- ✅ **Smart file naming** — every file is named `username__mediatype__datetime__uid.ext` so files are always organized and never overwritten incorrectly
+- ✅ **Duplicate prevention** — unique IDs are derived from Snapchat's own CDN content hashes, even for split-video snaps that share a timestamp
+- ✅ **Automatic retries** — failed downloads retry up to 4 times with exponential backoff
+
+---
+
+## Installation
+
 ```bash
-$ git clone https://github.com/allendema/SnapScrap.py.git
-$ cd SnapScrap.py/
-$ pip3 install -r requirements.txt
+git clone https://github.com/TheGitGooner/SnapScraper.py.git
+cd SnapScraper.py/
+pip3 install -r requirements.txt
 ```
 
-## Run it
-```bash
-# Change to this directory & Make the script executable.
-$ cd SnapScrap.py  && chmod +x SnapScrap.py
-
-# Run the script.
-$ python3 SnapScrap.py
-
-# Alternative way to run.
-$ python3 SnapScrap.py USERNAME
+**Requirements** (`requirements.txt`):
+```
+requests
+beautifulsoup4
 ```
 
-## In Action
-![inAction](https://github.com/allendema/SnapScrap.py/raw/main/example1.png)
+---
 
+## Usage
 
-## Your directory later
+```bash
+# Single username
+python3 SnapScraper.py USERNAME
 
-![Directory](https://github.com/allendema/SnapScrap.py/raw/main/example2.png)
+# Multiple usernames at once
+python3 SnapScraper.py USERNAME1 USERNAME2 USERNAME3
 
+# From a text file (one username per line, # lines are ignored)
+python3 SnapScraper.py --file usernames.txt
 
+# No arguments — script will prompt you
+python3 SnapScraper.py
+```
 
+### usernames.txt example
+```
+# My list of profiles to scrape
+catpisciotta
+someotheruser
+# anotheruser  ← commented out, will be skipped
+```
 
-## Use it
-Just enter one username which has a Public Profile.  
-It saves the media in current directory in a Folder named after given username.  
+---
 
+## Output
+
+Each profile gets its own folder named after the username. Files inside are named:
+
+```
+username__mediatype__YYYYMMDD_HHMMSS__uniqueid.ext
+```
+
+For example:
+```
+catpisciotta/
+├── catpisciotta__story__20260220_153042__gvbCOJ833kDMOQOplVxpi.jpeg
+├── catpisciotta__highlight_Hehe__20260218_204549__gulgiJJsVmDmWgc48yZFA.jpeg
+├── catpisciotta__highlight_Gym__20260218_160545__hTFyafj9Jh6RZan62594H.mp4
+└── catpisciotta__spotlight__20260210_091233__W7_EDlXWTBiXAEEniNoMP.mp4
+```
+
+**Media types in filenames:**
+- `story` — active 24-hour story snaps
+- `highlight_<title>` — snaps from a named highlight reel
+- `spotlight` — spotlight video clips
+
+---
+
+## Notes
+- Only works with **public profiles**
+- Private profiles are detected and skipped automatically
+- Re-running the script on the same profile safely skips files that already exist
+- Spotlights are always saved as `.mp4`; stories and highlights can be `.jpeg` or `.mp4`
+
+---
 
 ## Heads Up
-Made by exploring Python. Inspired by similiar programms. Use at own risk.
+Use at your own risk. Use it to archive important things, be polite, be respectful, and cause no harm.
 
-## Use it to archive important things, be polite and cause no harm.
+Original script by [allendema](https://codeberg.org/allendema) (2022).  
+Enhanced fork by [TheGitGooner](https://github.com/TheGitGooner).
 
-
-
-Allen 2022
-
-
-[![License: Apache License 2.0](https://img.shields.io/github/license/allendema/SnapScrap.py)](https://github.com/allendema/SnapScrap.py/blob/main/LICENSE)
-[![github commits](https://img.shields.io/github/last-commit/allendema/SnapScrap.py)](https://github.com/allendema/SnapScrap.py/commits/main)
+[![License: Apache License 2.0](https://img.shields.io/github/license/TheGitGooner/SnapScraper.py)](https://github.com/TheGitGooner/SnapScraper.py/blob/main/LICENSE)
+[![github commits](https://img.shields.io/github/last-commit/TheGitGooner/SnapScraper.py)](https://github.com/TheGitGooner/SnapScraper.py/commits/main)
