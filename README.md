@@ -51,6 +51,8 @@ tomfrommyspace
 someotheruser
 # anotheruser  ← commented out, will be skipped
 ```
+## In Action
+![inAction](https://github.com/TheGitGooner/SnapScraper.py/blob/main/example1Fullscrape.png)
 
 ---
 
@@ -75,6 +77,11 @@ tomfrommyspace/
 - `story` — active 24-hour story snaps
 - `highlight_<title>` — snaps from a named highlight reel
 - `spotlight` — spotlight video clips
+
+---
+## Your directory later
+
+![Directory](https://github.com/TheGitGooner/SnapScraper.py/blob/main/example2Outputfiles.png)
 
 ---
 
