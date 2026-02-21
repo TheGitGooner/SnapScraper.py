@@ -225,10 +225,11 @@ def check_public(data: dict, username: str) -> bool:
 
 def download_stories(username: str, data: dict, save_dir: str):
     try:
-        snap_list = data["props"]["pageProps"]["story"]["snapList"]
-    except KeyError:
-        print("  No active stories in the last 24 h.")
-        return
+        story = data["props"]["pageProps"]["story"]
+        # Snapchat sets "story" to None (not missing) when there are no active stories
+        snap_list = story["snapList"] if story else []
+    except (KeyError, TypeError):
+        snap_list = []
 
     if not snap_list:
         print("  No active stories in the last 24 h.")
@@ -339,9 +340,15 @@ def process_profile(username: str):
     save_dir = os.path.abspath(username)
     os.makedirs(save_dir, exist_ok=True)
 
-    download_stories(username, data, save_dir)
-    download_highlights(username, data, save_dir)
-    download_spotlights(username, data, save_dir)
+    for label, fn in [
+        ("stories",    lambda: download_stories(username, data, save_dir)),
+        ("highlights", lambda: download_highlights(username, data, save_dir)),
+        ("spotlights", lambda: download_spotlights(username, data, save_dir)),
+    ]:
+        try:
+            fn()
+        except Exception as exc:
+            print(f"{RED}  ✗  Unexpected error in {label} for @{username}: {exc}{RESET}")
 
     print(f"\n  ✅  Finished @{username}  →  {save_dir}")
 
