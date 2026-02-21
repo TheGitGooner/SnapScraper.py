@@ -1,14 +1,14 @@
 # SnapScraper.py
-Downloads public Snapchat stories, highlights, and spotlights to your system.
+Downloads public Snapchat stories, highlights, and spotlights.
 
 > **Forked from [allendema/SnapScrap.py](https://github.com/allendema/SnapScrap.py) and significantly enhanced with the help of Claude.**
 
 ## What's new in this fork
-- ✅ Download **highlights** (curated story reels) and **spotlights** in addition to active stories
-- ✅ **Batch mode** — scrape multiple profiles in one command or from a text file
-- ✅ **Smart file naming** — every file is named `username__mediatype__datetime__uid.ext` so files are always organized and never overwritten incorrectly
-- ✅ **Duplicate prevention** — unique IDs are derived from Snapchat's own CDN content hashes, even for split-video snaps that share a timestamp
-- ✅ **Automatic retries** — failed downloads retry up to 4 times with exponential backoff
+- Download **highlights** (curated story reels) and **spotlights** in addition to active stories
+- **Batch mode** — scrape multiple profiles in one command or from a text file
+- **Smart file naming** — every file is named `username__mediatype__datetime__uid.ext` so files are always organized and never overwritten incorrectly
+- **Duplicate prevention** — unique IDs are derived from Snapchat's own CDN content hashes, even for split-video snaps that share a timestamp
+- **Automatic retries** — failed downloads retry up to 4 times with exponential backoff
 
 ---
 
@@ -47,7 +47,7 @@ python3 SnapScraper.py
 ### usernames.txt example
 ```
 # My list of profiles to scrape
-catpisciotta
+tomfrommyspace
 someotheruser
 # anotheruser  ← commented out, will be skipped
 ```
@@ -64,11 +64,11 @@ username__mediatype__YYYYMMDD_HHMMSS__uniqueid.ext
 
 For example:
 ```
-catpisciotta/
-├── catpisciotta__story__20260220_153042__gvbCOJ833kDMOQOplVxpi.jpeg
-├── catpisciotta__highlight_Hehe__20260218_204549__gulgiJJsVmDmWgc48yZFA.jpeg
-├── catpisciotta__highlight_Gym__20260218_160545__hTFyafj9Jh6RZan62594H.mp4
-└── catpisciotta__spotlight__20260210_091233__W7_EDlXWTBiXAEEniNoMP.mp4
+tomfrommyspace/
+├── tomfrommyspace__story__20260220_153042__gvbCOJ833kDMOQOplVxpi.jpeg
+├── tomfrommyspace__highlight_Hehe__20260218_204549__gulgiJJsVmDmWgc48yZFA.jpeg
+├── tomfrommyspace__highlight_Gym__20260218_160545__hTFyafj9Jh6RZan62594H.mp4
+└── tomfrommyspace__spotlight__20260210_091233__W7_EDlXWTBiXAEEniNoMP.mp4
 ```
 
 **Media types in filenames:**
